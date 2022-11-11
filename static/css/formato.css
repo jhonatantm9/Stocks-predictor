@@ -1,0 +1,17 @@
+body{
+    font-family: Verdana, Geneva, Tahoma, sans-serif;
+}
+
+.header{
+    background-color: #D5D8DC;
+}
+
+.about{
+    background-color: #0A351C;
+    color: #FFFFFF;
+}
+
+.green-btn{
+    background-color: #0A351C;
+    color: #FFFFFF;
+}
