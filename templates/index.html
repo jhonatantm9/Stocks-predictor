@@ -1,79 +1,49 @@
-<!DOCTYPE html>
-<html>
-    <head>
-        <meta charset="utf-8">
-        <meta name="viewport" content="width=device-width, initial-scale=1">
-        <title>Machine Learning App</title>
-        <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-iYQeCzEYFbKjA/T2uDLTpkwGzCiq6soy8tYaI1GyVh/UjpbCx/TYkiZhlZB6+fzT" crossorigin="anonymous">
-        <link rel="stylesheet" href="{{url_for('static', filename='./css/formato.css')}}">
-    </head>
+{% extends './base/base.html' %}
 
-    <body>
-        {% from "_macro.html" import render_field %}
+{% from "_macro.html" import render_field %}
 
-        <div class="container header text-center">
-            <div class="row">
-                <div class="col align-self-center">
-                    <img src="../static/img/1200px-Escudo-UdeA.png", class="float-start", height="150", width="auto", alt="Escudo UdeA">
-                    <p class="h3">The Wizar of Stocks</p>
-                    <p class="h5">Made by:</p>
-                    <p>Diego Muñoz, Kieffer Paez, Jhonatan Tamayo</p>
+{% block content %}
+    <div class="container mt-4 mb-5">
+        
+        <p>
+            Para utilizar la aplicación ingrese todos los datos necesarios y presione el botón "Enviar". A continuación
+            el programa le mostrará el resultado de la predicción. También puede utilizar el botón "Reiniciar"
+            para borrar todos los campos del formulario.
+        </p>
+        <p>
+            Si desea conocer el significado de cada índice u otra información de interés, por favor
+            diríjase a la página <em>Acerca de</em> ubicada en la parte superior en la barra de navegación.
+        </p>
+            <form class="border rounded" id="formulario" name="form", method="POST">
+                <div class="mx-3 mb-3">
+                    <br>
+                    {{ render_field(form.input1, class="form-control", placeholder="Ingrese Op. In./(NWC+PP&E)", id="input1") }}
+                    <br>
+                    {{ render_field(form.input2, class="form-control", placeholder="Ingrese Op. In./Interest Expense", id="input2") }}
+                    <br>
+                    {{ render_field(form.input3, class="form-control", placeholder="Ingrese Working Capital Ratio", id="input3") }}
+                    <br>
+                    {{ render_field(form.input4, class="form-control", placeholder="Ingrese RoE", id="input4") }}
+                    <br>
+                    {{ render_field(form.input5, class="form-control", placeholder="Ingrese Asset Turnover", id="input5") }}
+                    <br>
+                    {{ render_field(form.input6, class="form-control", placeholder="Ingrese Gross Profit Margin", id="input6") }}
+                    <br>
+                    <button class="btn bg-green-udea" type="submit" value="Submit" onclick="showElement()">Enviar</button>
+                    <button class="btn bg-green-udea" type="submit" name="resetBtn" value="resetBtn" onclick="hideElement()">Reiniciar</button>
+                    <br>
                 </div>
-            </div>
-        </div>
-        <div class="container mt-4 mb-5">
-            <p>
-                Para utilizar la aplicación ingrese todos los datos necesarios y presione el botón. A continuación
-                el programa le mostrará el resultado de la predicción.
-            </p>
-            <p>
-                <u>Nota:</u> El máximo número de cifras decimales es 3. Ingresar los decimales con coma (,). Por ejemplo: 0,5
-            </p>
-                <form class="border rounded" id="formulario" name="form", method="POST">
-                    <div class="mx-3 mb-3">
-                        <br>
-                        {{ render_field(form.input1, class="form-control", placeholder="Rellene este campo") }}
-                        <br>
-                        {{ render_field(form.input2, class="form-control", placeholder="Rellene este campo") }}
-                        <br>
-                        {{ render_field(form.input3, class="form-control", placeholder="Rellene este campo") }}
-                        <br>
-                        {{ render_field(form.input4, class="form-control", placeholder="Rellene este campo") }}
-                        <br>
-                        {{ render_field(form.input5, class="form-control", placeholder="Rellene este campo") }}
-                        <br>
-                        {{ render_field(form.input6, class="form-control", placeholder="Rellene este campo") }}
-                        <br>
-                        <button class="btn green-btn" type="submit" value="Submit">Run</button>
-                        <button class="btn green-btn" onclick="hideElement()">Clear</button>
-                        <br>
-                    </div>
-                </form>
-            <div></div>
-            <p id="prediction" style="text-align: center;">{{ output }}</p>
-            <p class="mt-2">La predicción representa el rendimiento de las acciones de la empresa en un año</p>
-        </div>
-        <div class="container about">
-            <h3 class="h3 text-center mb-4">Acerca de...</h3>
-            <h5 class="h5 mb-2">La aplicación:</h5>
-            <p>
-                Esta aplicación realiza predicciones sobre las acciones de una empresa con base en diferentes
-                proporciones de datos de la misma. Se utiliza un modelo previamente entrenado que
-                permite dar un resultado con base en los datos ingresados por el usuario.
-                La respuesta de la predicción es el rendimiento predicho expresado en notación decimal.
-            </p>
-            <h5></h5>
-            <p>
-                Para la creación del modelo que permite las predicciones se utilizó la base de datos SimFin
-                que contiene diferentes características de empresas estadounidenses.
-            </p>
-        </div>
-        <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.1/dist/js/bootstrap.bundle.min.js" integrity="sha384-u1OknCvxWvY5kfmNBILK2hRnQC3Pr17a+RTT6rIHI7NnikvbZlHgTPOOmMi466C8" crossorigin="anonymous"></script>
-        <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.1/jquery.min.js"></script>
-        <script src="{{url_for('static', filename='./js/index.js')}}"></script>
-        <script src="{{url_for('static', filename='./js/jquery.js')}}"></script>
-        <script type="text/javascript">
-
-        </script>
-    </body>
-</html>
+            </form>
+        <div></div>
+        <p id="prediction" style="text-align: center;">{{ output }}</p>
+        <p class="mt-2">
+            La predicción representa el rendimiento de las acciones de la empresa en un año. Por ejemplo
+            si el resultado fue 0.1520; significa que en un año las acciones de la empresa tendrán un
+            porcentaje de crecimiento del 15.20%.
+        </p>
+    </div>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.1/jquery.min.js"></script>
+    <script src="{{url_for('static', filename='./js/index.js')}}"></script>
+    <script src="{{url_for('static', filename='./js/jquery.js')}}"></script>
+    <script type="text/javascript"></script>
+{% endblock %}

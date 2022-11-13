@@ -1,0 +1,133 @@
+{% extends './base/base.html' %}
+
+{% block content %}
+<div class="container mt-4 border-bottom border-secondary">
+    <p>
+        "<strong>Hola.</strong> Somos Kieffer, Diego y Jhonatan, estudiantes de ingeniería de sistemas de la
+        universidad de Antioquia. Esta página es el resultado de nuestro proyecto realizado
+        para el curso '<em>Proyecto integrador I</em>'. En la parte de abajo podrás encontrar mayor
+        información sobre el proyecto."
+    </p>
+</div>
+<div class="container">
+    <h4 class="h4 text-center mt-1 mb-4">Acerca de...</h4>
+    <div class="accordion" id="accordionAbout">
+        <div class="accordion-item">
+            <h2 class="accordion-header" id="headingOne">
+                <button class="accordion-button collapsed fw-bold" type="button" data-bs-toggle="collapse"
+                    data-bs-target="#collapseOne" aria-expanded="false" aria-controls="collapseOne">
+                    La aplicación
+                </button>
+            </h2>
+            <div id="collapseOne" class="accordion-collapse collapse" aria-labelledby="headingOne">
+                <div class="accordion-body">
+                    <p>
+                        Esta aplicación realiza predicciones sobre las acciones de una empresa con base en
+                        diferentes índices de la misma. Para utilizarla, en la página principal, el usuario
+                        debe ingresar todos los datos solicitados y el programa (a partir de un modelo
+                        previamente entrenado) realiza una predicción con la información dada.
+                    </p>
+                    <p>
+                        La respuesta de la predicción es el rendimiento de las acciones de la compañía
+                        expresado en notación decimal.
+                    </p>
+                </div>
+            </div>
+        </div>
+        <div class="accordion-item">
+            <h2 class="accordion-header" id="headingTwo">
+                <button class="accordion-button collapsed fw-bold" type="button" data-bs-toggle="collapse"
+                    data-bs-target="#collapseTwo" aria-expanded="false" aria-controls="collapseTwo">
+                    El modelo utilizado en las predicciones
+                </button>
+            </h2>
+            <div id="collapseTwo" class="accordion-collapse collapse" aria-labelledby="headingTwo">
+                <div class="accordion-body">
+                    <p>
+                        La aplicación utiliza un modelo previamente creado para realizar las predicciones.
+                        El modelo se realizó en python utilizando las librerías <em>scikit-learn</em> y
+                        <em>pandas</em>. Para el entrenamiento de este, se utilizó la base de datos
+                        <em>SimFin</em> que contiene diferentes características de empresas estadounidenses.
+                    </p>
+                    <p>
+                        Más específicamente, el regresor de la aplicación es un <em>Stacking regressor</em>
+                        que utiliza los modelos <em>Gradient boosting regressor, K-nearest neighbors
+                            regressor</em> y <em>Histogram gradient boosting regressor</em>
+                    </p>
+                </div>
+            </div>
+        </div>
+        <div class="accordion-item">
+            <h2 class="accordion-header" id="headingThree">
+                <button class="accordion-button collapsed fw-bold" type="button" data-bs-toggle="collapse"
+                    data-bs-target="#collapseThree" aria-expanded="false" aria-controls="collapseThree">
+                    Los índices usados en la aplicación
+                </button>
+            </h2>
+            <div id="collapseThree" class="accordion-collapse collapse" aria-labelledby="headingThree">
+                <div class="accordion-body">
+                    <ul>
+                        <li>
+                            <strong>Op. In./(NWC+FA):</strong> Este índice se define como una división entre el ingreso
+                            de operación
+                            (cantidad de dinero que queda después de deducir de los ingresos los gastos operativos y el
+                            costo de los bienes vendidos) y la suma entre el capital de trabajo neto (diferencia
+                            entre los activos actuales y los pasivos o gastos actuales de una empresa en su balance
+                            general) y la propiedad, planta y equipo de una empresa (activos tangibles de una
+                            empresa, es decir, de naturaleza física o tangible).
+                        </li>
+                        Op. In./(NWC+FA) = Operating
+                        income/(Net working capital + PP&E)
+                        <li>
+                            <strong>Op. In./Interest Expense:</strong> Se define como la razón entre el ingreso de
+                            operación y el gasto por intereses de la compañía (este último se refiere al interés
+                            pagadero sobre cualquier préstamo: bonos, préstamos, deuda convertible o líneas de
+                            crédito).
+                        </li>
+                        Op. In./Interest Expense = Operating income/Interest expense
+                        <li>
+                            <strong>Working Capital Ratio:</strong> El índice de capital de
+                            trabajo refleja la eficiencia operativa de una empresa y la salud de sus finanzas a corto
+                            plazo. El índice de capital de trabajo se calcula dividiendo el activo circulante de la
+                            empresa entre su pasivo circulante.
+                        </li>
+                        Working Capital = Activo Corriente - Pasivo Corriente
+                        <li>
+                            <strong>RoE:</strong> Es un indicador que sirve para medir tanto
+                            la rentabilidad de una empresa como la relación entre el beneficio neto y la cifra de fondos
+                            propios.
+                        </li>
+                        RoE = Beneficio neto/Fondos propios medios
+                        <li>
+                            <strong>Asset Turnover:</strong> El índice de rotación de activos
+                            mide el valor de las ventas o los ingresos de una empresa en relación con el valor de sus
+                            activos . El índice de rotación de activos se puede utilizar como un indicador de la
+                            eficiencia con la que una empresa utiliza sus activos para generar ingresos.
+                        </li>
+                        Asset Turnover = Ventas totales / (Activos iniciales + Activos finales)/2
+                        <li>
+                            <strong>Gross Profit Margin:</strong> Es una métrica que utilizan
+                            los analistas para evaluar la salud financiera de una empresa mediante el cálculo de la
+                            cantidad de dinero que queda de las ventas de productos después de restar el costo de los
+                            bienes vendidos(COGS).
+                        </li>
+                        Gross Profit Margin = (Ventas netas - COGS)/Ventas netas
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- <h5 class="h5 mb-2">La aplicación:</h5>
+        <p>
+            Esta aplicación realiza predicciones sobre las acciones de una empresa con base en diferentes
+            proporciones de datos de la misma. Se utiliza un modelo previamente entrenado que
+            permite dar un resultado con base en los datos ingresados por el usuario.
+            La respuesta de la predicción es el rendimiento predicho expresado en notación decimal.
+        </p>
+        <h5></h5>
+        <p>
+            Para la creación del modelo que permite las predicciones se utilizó la base de datos SimFin
+            que contiene diferentes características de empresas estadounidenses.
+        </p> -->
+</div>
+{% endblock %}

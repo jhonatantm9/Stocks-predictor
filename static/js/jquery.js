@@ -1,4 +1,4 @@
-$(document).ready(function(e){
+$(document).ready(function(){
     console.log("Hello");
 
     function ajax_formulario(){
@@ -17,7 +17,8 @@ $(document).ready(function(e){
         })
     }
 
-    $('formulario').submit(function(event){
+    $('formulario').on(function(event){
+        console.log("Click");
         event.preventDefault();
         ajax_formulario();
     })
