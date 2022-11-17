@@ -4,6 +4,12 @@ import joblib
 import forms
 import json
 
+X_sin_escalar = pd.read_csv("./Tables/Ratios_sin_escalar.csv", index_col = 0)
+X_sin_escalar = X_sin_escalar.drop(['Cash Ratio'], axis=1)
+X_sin_escalar.reset_index(inplace=True, drop=True)
+
+X_min = X_sin_escalar.min()
+X_max = X_sin_escalar.max()
 # Declare a Flask app
 app = Flask(__name__)
 
@@ -19,15 +25,24 @@ def main():
 
         # Unpickle classifier
         model = joblib.load("model.pkl")
-        print('Se presiono el boton')
         # Get values through input bars
-        OpIn_Over_NWC_PPE = request.form['input1']
-        print(OpIn_Over_NWC_PPE)
-        OpIn_Over_InterestExpense = request.form['input2']
-        WorkingCapitalRatio = request.form['input3']
-        RoE = request.form['input4']
-        Asset_Turnover = request.form['input5']
-        Gross_Profit_Margin = request.form['input6']
+        OpIn_Over_NWC_PPE = float(request.form['input1'])
+        OpIn_Over_NWC_PPE = (OpIn_Over_NWC_PPE - X_min[0]) / (X_max[0] - X_min[0])
+
+        OpIn_Over_InterestExpense = float(request.form['input2'])
+        OpIn_Over_InterestExpense = (OpIn_Over_InterestExpense - X_min[1]) / (X_max[1] - X_min[1])
+
+        WorkingCapitalRatio = float(request.form['input3'])
+        WorkingCapitalRatio = (WorkingCapitalRatio - X_min[2]) / (X_max[2] - X_min[2])
+
+        RoE = float(request.form['input4'])
+        RoE = (RoE - X_min[3]) / (X_max[3] - X_min[3])
+
+        Asset_Turnover = float(request.form['input5'])
+        Asset_Turnover = (Asset_Turnover - X_min[4]) / (X_max[4] - X_min[4])
+
+        Gross_Profit_Margin = float(request.form['input6'])
+        Gross_Profit_Margin = (Gross_Profit_Margin - X_min[5]) / (X_max[5] - X_min[5])
         
         # Put inputs to dataframe
         X = pd.DataFrame([[OpIn_Over_NWC_PPE, OpIn_Over_InterestExpense,WorkingCapitalRatio,RoE,Asset_Turnover,Gross_Profit_Margin]],
